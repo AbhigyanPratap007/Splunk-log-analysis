@@ -1,41 +1,58 @@
-# Splunk-Log-analysis
-Windows security events log analysis in Splunk with dashboards and correlation rules for privileged activity
-
 # Splunk Log Analysis — Windows Security Events
 
-## Overview
-This project applies Splunk to analyse **8,000+ Windows Security logs**, focusing on high-value events tied to privilege escalation and account misuse. The goal was to improve SOC visibility by creating searches and dashboards that highlight risky activities and support faster triage.
-
-## Key Event IDs
-- **4672** — Special Logon (privileged accounts)
-- **4688** — Process Creation
-- **4799** — Security Group Management
-
-## Approach
-1. Ingested Windows event logs into Splunk 9.3.2.
-2. Built dashboards visualising:
-   - Total events by ID
-   - Frequency of audit failures vs. successes
-   - Spikes in special logons and process creation :contentReference[oaicite:0]{index=0}.
-3. Tuned SPL searches to reduce false positives while catching abnormal privilege activity.
-
-## Results
-- Identified spikes in privileged logons (4672) and group membership queries (4799).  
-- Created correlation searches combining 4672 + 4688 to flag **processes spawned shortly after special logons** — a strong indicator of compromise.  
-- Dashboards improved analyst visibility into account misuse and suspicious process chains.
-
-## Repository Structure
-- `dashboards/` — XML + screenshots of Splunk dashboards
-- `queries/` — saved SPL searches and correlation rules
-- `docs/` — methodology and lessons learned
-
-## How to Reproduce
-1. Collect Windows logs (EVTX export or Splunk Universal Forwarder).
-2. Import SPL queries from `queries/` into Splunk.
-3. Upload dashboard XMLs to Splunk Web.
-
-## Next Steps
-- Add enrichment with Active Directory metadata (user roles, OU).
-- Convert SPL queries into **Sigma rules** for broader SOC use.
+## 📌 Overview
+This project demonstrates the use of **Splunk 9.3.2** for analyzing **8,000+ Windows Security logs**. The primary focus was on high-value security event IDs related to **privileged logons, process creation, and security group management changes**. The aim was to improve SOC visibility and triage workflows through dashboards, correlation searches, and event trend analysis.
 
 ---
+
+## ⚙️ Setup
+- **Data Source**: Windows Security logs (EVTX exports ingested into Splunk).
+- **Splunk Version**: 9.3.2.
+- **Analysis Approach**:
+  - Created searches for critical security event IDs.
+  - Built dashboards for event counts, top categories, and timelines.
+  - Combined correlation searches to identify risky privilege activity.
+
+---
+
+## 🎯 Objectives
+- Detect **privileged logons (4672)** and investigate process creation (4688).  
+- Monitor **security group changes (4799)** for signs of privilege escalation.  
+- Build SOC dashboards to visualize event frequency and categories.  
+- Support faster incident response with correlation queries.  
+
+---
+
+## 🔍 Key Event IDs & Categories
+- **4672** — Special Logon  
+- **4688** — Process Creation  
+- **4799** — Security Group Management  
+
+Other significant events observed in dataset:  
+- **5379, 4624, 5058, 5061, 5059** (logon/logoff, service shutdown, audit policy change).  
+
+---
+
+## 📊 Results
+- **Total Events Analyzed**: 8,000+ Windows Security log entries.  
+- **Top Event IDs**: 5379, 4624, 4672, 4799, 5061 (with 4672 and 4799 being high-value security signals):contentReference[oaicite:0]{index=0}.  
+- **Audit Results**:  
+  - Audit Success: 8,076 events  
+  - Audit Failure: 52 events:contentReference[oaicite:1]{index=1}  
+- **Task Categories Breakdown**:  
+  - User Account Management: 3,668 events  
+  - Logon: 1,384 events  
+  - Special Logon: 1,280 events  
+  - Security Group Management: 736 events:contentReference[oaicite:2]{index=2}  
+- Built correlation between **special logon (4672)** and **process creation (4688)** → useful to detect privilege misuse.
+
+---
+
+## 📷 Screenshots & Evidence
+**Splunk Dashboard — Top 10 Event IDs**
+![Splunk Top 10 Event IDs](screenshots/splunk_top10_eventids.png)
+
+**Splunk Dashboard — Event Breakdown**
+![Splunk Event Breakdown](screenshots/splunk_event_breakdown.png)
+
+📄 Full project report: [SIEM_EVENTS_OVERVIEW.pdf](docs/SIEM_EVENTS_OVERVIEW.pdf)
