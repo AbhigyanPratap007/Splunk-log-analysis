@@ -46,13 +46,4 @@ Other significant events observed in dataset:
   - Security Group Management: 736 events:contentReference[oaicite:2]{index=2}  
 - Built correlation between **special logon (4672)** and **process creation (4688)** → useful to detect privilege misuse.
 
----
-
-## 📷 Screenshots & Evidence
-**Splunk Dashboard — Top 10 Event IDs**
-![Splunk Top 10 Event IDs](screenshots/splunk_top10_eventids.png)
-
-**Splunk Dashboard — Event Breakdown**
-![Splunk Event Breakdown](screenshots/splunk_event_breakdown.png)
-
 📄 Full project report: [SIEM_EVENTS_OVERVIEW.pdf](docs/SIEM_EVENTS_OVERVIEW.pdf)
