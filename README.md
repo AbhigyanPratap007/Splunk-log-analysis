@@ -35,15 +35,15 @@ Other significant events observed in dataset:
 
 ## 📊 Results
 - **Total Events Analyzed**: 8,000+ Windows Security log entries.  
-- **Top Event IDs**: 5379, 4624, 4672, 4799, 5061 (with 4672 and 4799 being high-value security signals):contentReference[oaicite:0]{index=0}.  
+- **Top Event IDs**: 5379, 4624, 4672, 4799, 5061 (with 4672 and 4799 being high-value security signals)
 - **Audit Results**:  
   - Audit Success: 8,076 events  
-  - Audit Failure: 52 events:contentReference[oaicite:1]{index=1}  
+  - Audit Failure: 52 events 
 - **Task Categories Breakdown**:  
   - User Account Management: 3,668 events  
   - Logon: 1,384 events  
   - Special Logon: 1,280 events  
-  - Security Group Management: 736 events:contentReference[oaicite:2]{index=2}  
+  - Security Group Management: 736 events 
 - Built correlation between **special logon (4672)** and **process creation (4688)** → useful to detect privilege misuse.
 
 📄 Full project report: (docs/SIEM_EVENTS_OVERVIEW.pdf)
